@@ -1,0 +1,5 @@
+# server
+server:
+  title: spring-micro-session
+  version: '@project.version@'
+  port: 8180
