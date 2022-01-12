@@ -23,6 +23,11 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<lombok.version>1.18.20</lombok.version>
+		<lettuce.version>6.1.5.RELEASE</lettuce.version>
+		<commons.lang3.version>3.12.0</commons.lang3.version>
+		<commons.pool.version>2.11.1</commons.pool.version>
 	</properties>
 
 	<profiles>
@@ -54,9 +59,40 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
+		</dependency>
+
+		<!-- Redis modules -->
+<!--		<dependency>-->
+<!--			<groupId>io.lettuce</groupId>-->
+<!--			<artifactId>lettuce-core</artifactId>-->
+<!--			<version>${lettuce.version}</version>-->
+<!--		</dependency>-->
+
+		<!-- Productivity modules -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Apache Dependencies -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>${commons.pool.version}</version>
 		</dependency>
 
 		<!-- Testing modules -->
