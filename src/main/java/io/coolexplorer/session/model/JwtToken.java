@@ -3,8 +3,12 @@ package io.coolexplorer.session.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.TimeToLive;
+import org.springframework.data.redis.core.index.Indexed;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -15,8 +19,11 @@ import java.time.LocalDateTime;
 @RedisHash("jtwToken")
 public class JwtToken implements Serializable {
     @Id
-    private Long id;
-    private String email;
+    private String id;
+    @Indexed
+    private Long accountId;
     private String jwtToken;
-    private LocalDateTime updatedTime;
+    @TimeToLive
+    private Long expiration;
+    private LocalDateTime updatedAt;
 }

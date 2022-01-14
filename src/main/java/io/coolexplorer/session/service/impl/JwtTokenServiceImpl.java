@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Service
 public class JwtTokenServiceImpl implements JwtTokenService {
@@ -14,13 +16,30 @@ public class JwtTokenServiceImpl implements JwtTokenService {
 
     @Override
     @Transactional
-    public Long create(JwtToken token) {
-        return tokenRepository.save(token).getId();
+    public JwtToken create(JwtToken token) {
+        JwtToken retrievedToken = getTokenByAccountId(token.getAccountId());
+
+        if (retrievedToken != null) {
+            token.setId(retrievedToken.getId());
+        }
+
+        token.setUpdatedAt(LocalDateTime.now());
+        return tokenRepository.save(token);
     }
 
     @Override
-    public JwtToken get(Long id) {
+    public JwtToken update(JwtToken token) {
+        return create(token);
+    }
+
+    @Override
+    public JwtToken getToken(String id) {
         return tokenRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Not found data. Id: " + id));
+    }
+
+    @Override
+    public JwtToken getTokenByAccountId(Long accountId) {
+        return tokenRepository.findJwtTokenByAccountId(accountId);
     }
 
 
