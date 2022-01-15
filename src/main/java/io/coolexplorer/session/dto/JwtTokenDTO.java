@@ -3,6 +3,7 @@ package io.coolexplorer.session.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.coolexplorer.session.model.JwtToken;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,10 +26,16 @@ public class JwtTokenDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     @ToString
+    @Schema(description = "JwtToken Info")
     public static class JwtTokenInfo {
+        @Schema(example = "ff6681f0-50f8-4110-bf96-ef6cec45780e")
         private String id;
+        @Schema(example = "1L")
         private Long accountId;
+        @Schema(example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.....")
         private String jwtToken;
+        @Schema(example = "2021-01-01T00:00:00")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime updatedAt;
 
         public static JwtTokenInfo from(JwtToken jwtToken, ModelMapper modelMapper) {
@@ -42,8 +49,11 @@ public class JwtTokenDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     @ToString
+    @Schema(description = "JwtToken Creation Request")
     public static class JwtTokenCreateRequest {
+        @Schema(example = "1L")
         private Long accountId;
+        @Schema(example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.....")
         private String jwtToken;
     }
 
@@ -52,7 +62,9 @@ public class JwtTokenDTO {
     @Accessors(chain = true)
     @AllArgsConstructor
     @NoArgsConstructor
+    @Schema(description = "JwtToken Search Param")
     public static class JwtTokenParams {
+        @Schema(example = "1L")
         private Long accountId;
     }
 }
