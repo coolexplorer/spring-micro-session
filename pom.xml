@@ -30,6 +30,7 @@
 
 		<modelMapper.version>2.4.4</modelMapper.version>
 		<openapi.version>1.6.3</openapi.version>
+		<embedded.redis.version>0.7.3</embedded.redis.version>
 	</properties>
 
 	<profiles>
@@ -107,6 +108,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>it.ozimov</groupId>
+			<artifactId>embedded-redis</artifactId>
+			<version>${embedded.redis.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 

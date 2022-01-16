@@ -9,6 +9,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,5 +78,16 @@ public class JwtTokenController {
         JwtToken jwtToken = jwtTokenService.getTokenByAccountId(params.getAccountId());
 
         return JwtTokenDTO.JwtTokenInfo.from(jwtToken, modelMapper);
+    }
+
+    @Operation(summary = "Token Cache Retrieve by Params", description = "Token Cache Retrieve by Params", responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = JwtTokenDTO.JwtTokenInfo.class))),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(example = ""))),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(example = "")))
+    })
+    @DeleteMapping("/token/{id}")
+    public ResponseEntity<String> deleteToken(@PathVariable("id") String id) {
+        jwtTokenService.delete(id);
+        return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
 }
