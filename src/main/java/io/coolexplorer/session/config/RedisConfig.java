@@ -37,6 +37,10 @@ public class RedisConfig {
         this.database = database;
     }
 
+    public int getRedisPort() {
+        return redisPort;
+    }
+
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
         ClientOptions clientOptions = ClientOptions.builder()
