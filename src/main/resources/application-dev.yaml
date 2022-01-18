@@ -1,0 +1,35 @@
+# spring
+
+# server
+server:
+  title: spring-micro-session
+  version: '@project.version@'
+  port: 8180
+
+# redis
+redis:
+  host: localhost
+  port: 30379
+  database: 0
+  password: K9eW5bRyFP
+  timeout: 60000
+
+# documentation
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+# logging
+logging:
+  file:
+    name: logs/session.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: logs/session-%d{yyyy-MM-dd}.%i.log
+      max-file-size: 100MB
+      total-size-cap: 1GB
+      max-history: 7
+      clean-history-on-start: false
+  level:
+    io:
+      coolexplorer: DEBUG
