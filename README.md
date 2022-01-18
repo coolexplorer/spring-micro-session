@@ -1,3 +1,12 @@
+[![dockeri.co](https://dockeri.co/image/coolexplorer/spring-micro-session)](https://hub.docker.com/r/coolexplorer/spring-micro-session)
+
+[![CodeQL](https://github.com/coolexplorer/spring-micro-session/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/coolexplorer/spring-micro-session/actions/workflows/codeql-analysis.yml)
+[![Maven Package](https://github.com/coolexplorer/spring-micro-session/actions/workflows/maven-publish.yml/badge.svg)](https://github.com/coolexplorer/spring-micro-session/actions/workflows/maven-publish.yml)
+[![docker](https://github.com/coolexplorer/spring-micro-session/actions/workflows/docker.yml/badge.svg)](https://github.com/coolexplorer/spring-micro-session/actions/workflows/docker.yml)
+[![release](https://github.com/coolexplorer/spring-micro-session/actions/workflows/release.yml/badge.svg)](https://github.com/coolexplorer/spring-micro-session/actions/workflows/release.yml)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/coolexplorer/spring-micro-session)
+
+
 # spring-micro-session
 In this project, I will create a simple Session service which can store cache data.
 This is the project to make a microservice architecture using Spring boot framework.
