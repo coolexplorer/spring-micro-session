@@ -31,6 +31,10 @@
 		<modelMapper.version>2.4.4</modelMapper.version>
 		<openapi.version>1.6.3</openapi.version>
 		<embedded.redis.version>0.7.3</embedded.redis.version>
+
+		<!-- Jgit Configuration -->
+		<git.user> </git.user>
+		<git.password> </git.password>
 	</properties>
 
 	<profiles>
@@ -128,6 +132,28 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>1.0-m5.1</version>
+				<configuration>
+					<!-- For specific plugin configuration options,
+                    see the Goals documentation page -->
+					<username>${git.user}</username>
+					<password>${git.password}</password>
+					<flowInitContext>
+						<masterBranchName>main</masterBranchName>
+						<developBranchName>develop</developBranchName>
+					</flowInitContext>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<enableSshAgent>true</enableSshAgent>
+					<noDeploy>true</noDeploy>
+					<pushReleases>true</pushReleases>
+					<pullDevelop>true</pullDevelop>
+					<pullMaster>true</pullMaster>
+					<scmCommentPrefix>[RELEASE] </scmCommentPrefix>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
