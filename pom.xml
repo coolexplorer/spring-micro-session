@@ -30,6 +30,7 @@
 		<modelMapper.version>2.4.4</modelMapper.version>
 		<openapi.version>1.6.3</openapi.version>
 		<embedded.redis.version>0.7.3</embedded.redis.version>
+		<jayway.version>2.6.0</jayway.version>
 
 		<!-- Jgit Configuration -->
 		<git.user> </git.user>
@@ -85,6 +86,11 @@
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>${modelMapper.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>${jayway.version}</version>
 		</dependency>
 
 		<!-- Apache Dependencies -->

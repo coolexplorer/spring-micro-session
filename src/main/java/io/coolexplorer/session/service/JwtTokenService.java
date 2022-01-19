@@ -6,6 +6,6 @@ public interface JwtTokenService {
     JwtToken create(JwtToken token);
     JwtToken update(JwtToken token);
     JwtToken getToken(String id);
-    JwtToken getTokenByAccountId(Long accountId);
+    JwtToken getToken(Long accountId);
     void delete(String id);
 }
