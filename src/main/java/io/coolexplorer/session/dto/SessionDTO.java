@@ -1,6 +1,7 @@
 package io.coolexplorer.session.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.coolexplorer.session.annotation.JsonStringConstraint;
 import io.coolexplorer.session.model.Session;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -57,6 +58,7 @@ public class SessionDTO {
         @NotNull(message = "{account.id.empty}")
         private Long accountId;
         @Schema(example = "{\"orderCount\":1}")
+        @JsonStringConstraint(message = "{session.value.not.json}")
         @NotBlank(message = "{session.value.empty}")
         private String values;
     }
