@@ -11,6 +11,8 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.modelmapper.ModelMapper;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class JwtTokenDTO {
@@ -51,8 +53,10 @@ public class JwtTokenDTO {
     @Schema(description = "JwtToken Creation Request")
     public static class JwtTokenCreateRequest {
         @Schema(example = "1L")
+        @NotNull(message = "{account.id.empty}")
         private Long accountId;
         @Schema(example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.....")
+        @NotBlank(message = "{token.value.empty}")
         private String jwtToken;
     }
 
@@ -64,6 +68,7 @@ public class JwtTokenDTO {
     @Schema(description = "JwtToken Search Param")
     public static class JwtTokenSearchParams {
         @Schema(example = "1L")
+        @NotNull(message = "{account.id.empty}")
         private Long accountId;
     }
 }

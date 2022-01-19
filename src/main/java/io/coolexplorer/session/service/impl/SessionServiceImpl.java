@@ -34,7 +34,7 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Session getSession(String id) {
-        return sessionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Not found session data " + id));
+        return sessionRepository.findById(id).orElseThrow(SessionNotFoundException::new);
     }
 
     @Override

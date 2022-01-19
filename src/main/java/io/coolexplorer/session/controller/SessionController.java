@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
@@ -34,7 +36,7 @@ public class SessionController {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(example = "")))
     })
     @PostMapping("/session")
-    public SessionDTO.SessionInfo createSession(@RequestBody SessionDTO.SessionCreateRequest request) {
+    public SessionDTO.SessionInfo createSession(@Valid @RequestBody SessionDTO.SessionCreateRequest request) {
         Session session = modelMapper.map(request, Session.class);
         Session createdSession = sessionService.create(session);
 
@@ -47,7 +49,7 @@ public class SessionController {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(example = "")))
     })
     @PutMapping("/session/{sessionId}")
-    public SessionDTO.SessionInfo updateSession(@PathVariable("sessionId") String id, @RequestBody SessionDTO.SessionCreateRequest request) {
+    public SessionDTO.SessionInfo updateSession(@PathVariable("sessionId") String id, @Valid @RequestBody SessionDTO.SessionCreateRequest request) {
         Session session = modelMapper.map(request, Session.class);
         Session updatedSession = sessionService.create(session.setId(id));
 
@@ -72,7 +74,7 @@ public class SessionController {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(example = "")))
     })
     @GetMapping("/session")
-    public SessionDTO.SessionInfo getSession(SessionDTO.SessionSearchParams params) {
+    public SessionDTO.SessionInfo getSession(@Valid SessionDTO.SessionSearchParams params) {
         Session session = sessionService.getSession(params.getAccountId());
 
         return SessionDTO.SessionInfo.from(session, modelMapper);
