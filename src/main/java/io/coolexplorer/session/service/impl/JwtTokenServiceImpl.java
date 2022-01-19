@@ -1,5 +1,6 @@
 package io.coolexplorer.session.service.impl;
 
+import io.coolexplorer.session.exception.jwtToken.JwtTokenNotFoundException;
 import io.coolexplorer.session.model.JwtToken;
 import io.coolexplorer.session.repository.JwtTokenRepository;
 import io.coolexplorer.session.service.JwtTokenService;
@@ -17,7 +18,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
     @Override
     @Transactional
     public JwtToken create(JwtToken token) {
-        JwtToken retrievedToken = getTokenByAccountId(token.getAccountId());
+        JwtToken retrievedToken = getToken(token.getAccountId());
 
         if (retrievedToken != null) {
             token.setId(retrievedToken.getId());
@@ -34,16 +35,22 @@ public class JwtTokenServiceImpl implements JwtTokenService {
 
     @Override
     public JwtToken getToken(String id) {
-        return tokenRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Not found data. Id: " + id));
+        return tokenRepository.findById(id).orElseThrow(JwtTokenNotFoundException::new);
     }
 
     @Override
-    public JwtToken getTokenByAccountId(Long accountId) {
+    public JwtToken getToken(Long accountId) {
         return tokenRepository.findJwtTokenByAccountId(accountId);
     }
 
     @Override
     public void delete(String id) {
+        JwtToken retrievedToken = getToken(id);
+
+        if (retrievedToken == null) {
+            throw new JwtTokenNotFoundException();
+        }
+
         tokenRepository.deleteById(id);
     }
 }
