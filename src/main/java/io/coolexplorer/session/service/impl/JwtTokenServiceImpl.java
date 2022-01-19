@@ -35,7 +35,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
 
     @Override
     public JwtToken getToken(String id) {
-        return tokenRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Not found data. Id: " + id));
+        return tokenRepository.findById(id).orElseThrow(JwtTokenNotFoundException::new);
     }
 
     @Override

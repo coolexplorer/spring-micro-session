@@ -11,6 +11,8 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.modelmapper.ModelMapper;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class SessionDTO {
@@ -52,8 +54,10 @@ public class SessionDTO {
     @Schema(description = "Session Creation Request")
     public static class SessionCreateRequest {
         @Schema(example = "1L")
+        @NotNull(message = "{account.id.empty}")
         private Long accountId;
         @Schema(example = "{\"orderCount\":1}")
+        @NotBlank(message = "{session.value.empty}")
         private String values;
     }
 
@@ -66,6 +70,7 @@ public class SessionDTO {
     @Schema(description = "Session Search Param")
     public static class SessionSearchParams {
         @Schema(example = "1L")
+        @NotNull(message = "{account.id.empty}")
         private Long accountId;
     }
 }

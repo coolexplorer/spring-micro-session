@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -34,7 +36,7 @@ public class JwtTokenController {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(example = "")))
     })
     @PostMapping("/token")
-    public JwtTokenDTO.JwtTokenInfo createToken(@RequestBody JwtTokenDTO.JwtTokenCreateRequest request) {
+    public JwtTokenDTO.JwtTokenInfo createToken(@Valid @RequestBody JwtTokenDTO.JwtTokenCreateRequest request) {
         JwtToken jwtToken = modelMapper.map(request, JwtToken.class);
         JwtToken createdToken = jwtTokenService.create(jwtToken);
 
@@ -47,7 +49,7 @@ public class JwtTokenController {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(example = "")))
     })
     @PutMapping("/token")
-    public JwtTokenDTO.JwtTokenInfo updateToken(@RequestBody JwtTokenDTO.JwtTokenCreateRequest request) {
+    public JwtTokenDTO.JwtTokenInfo updateToken(@Valid @RequestBody JwtTokenDTO.JwtTokenCreateRequest request) {
         JwtToken jwtToken = modelMapper.map(request, JwtToken.class);
         JwtToken createdToken = jwtTokenService.update(jwtToken);
 
