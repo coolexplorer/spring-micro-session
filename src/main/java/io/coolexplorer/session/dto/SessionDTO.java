@@ -58,8 +58,8 @@ public class SessionDTO {
         @NotNull(message = "{account.id.empty}")
         private Long accountId;
         @Schema(example = "{\"orderCount\":1}")
-        @JsonStringConstraint(message = "{session.value.not.json}")
         @NotBlank(message = "{session.value.empty}")
+        @JsonStringConstraint(message = "{session.value.not.json}")
         private String values;
     }
 
