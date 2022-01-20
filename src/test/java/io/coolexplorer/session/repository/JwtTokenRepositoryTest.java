@@ -27,7 +27,7 @@ public class JwtTokenRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        defaultJwtToken = TestJwtTokenBuilder.dummyJwtToken(TestJwtTokenBuilder.ID);
+        defaultJwtToken = TestJwtTokenBuilder.defaultJwtToken(TestJwtTokenBuilder.ID);
         jwtTokenRepository.save(defaultJwtToken);
     }
 
@@ -38,7 +38,7 @@ public class JwtTokenRepositoryTest {
         @DisplayName("Success")
         void testJwtTokenCacheCreate() {
             String id = UUID.randomUUID().toString();
-            JwtToken jwtToken = TestJwtTokenBuilder.dummyJwtToken(id);
+            JwtToken jwtToken = TestJwtTokenBuilder.defaultJwtToken(id);
             JwtToken createdJwtToken = jwtTokenRepository.save(jwtToken);
 
             assertThat(createdJwtToken.getJwtToken()).isNotNull().isEqualTo(jwtToken.getJwtToken());
@@ -71,7 +71,7 @@ public class JwtTokenRepositoryTest {
         @Test
         @DisplayName("Success")
         void testJwtTokenCacheUpdate() {
-            JwtToken temp = TestJwtTokenBuilder.dummyJwtToken(UUID.randomUUID().toString());
+            JwtToken temp = TestJwtTokenBuilder.defaultJwtToken(UUID.randomUUID().toString());
 
             jwtTokenRepository.save(temp);
 
@@ -91,7 +91,7 @@ public class JwtTokenRepositoryTest {
         @DisplayName("Success")
         void testJwtTokenCacheDeletionTest() {
             String id = UUID.randomUUID().toString();
-            JwtToken temp = TestJwtTokenBuilder.dummyJwtToken(id);
+            JwtToken temp = TestJwtTokenBuilder.defaultJwtToken(id);
 
             jwtTokenRepository.save(temp);
             jwtTokenRepository.deleteById(id);
