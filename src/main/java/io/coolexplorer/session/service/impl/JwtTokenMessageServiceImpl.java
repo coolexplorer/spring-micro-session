@@ -45,7 +45,7 @@ public class JwtTokenMessageServiceImpl implements JwtTokenMessageService {
             topics = JwtTokenTopic.TOPIC_REQUEST_JWT_TOKEN,
             groupId = "${kafka.consumer.groupId}",
             containerFactory = "kafkaJwtTokenListenerContainerFactory")
-    @SendTo
+    @SendTo(JwtTokenTopic.TOPIC_REPLY_JWT_TOKEN)
     public JwtTokenMessage.JwtTokenInfo listenRetrieveJwtTokenCache(ConsumerRecord<String, String> record, Acknowledgment ack) throws JsonProcessingException {
         LOGGER.debug("received message from '{}' : {}", record.topic(), record.value());
 

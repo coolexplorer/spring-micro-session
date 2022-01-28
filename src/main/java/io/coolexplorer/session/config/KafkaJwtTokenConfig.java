@@ -61,7 +61,7 @@ public class KafkaJwtTokenConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, String> consumerFactory() {
+    public ConsumerFactory<String, String> jwtTokenConsumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumeProperties());
     }
 
@@ -74,7 +74,7 @@ public class KafkaJwtTokenConfig {
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaJwtTokenListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
-        factory.setConsumerFactory(consumerFactory());
+        factory.setConsumerFactory(jwtTokenConsumerFactory());
         factory.setReplyTemplate(kafkaJwtTokenTemplate());
         return factory;
     }

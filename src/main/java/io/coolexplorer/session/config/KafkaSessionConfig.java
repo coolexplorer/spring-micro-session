@@ -61,7 +61,7 @@ public class KafkaSessionConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, String> consumerFactory() {
+    public ConsumerFactory<String, String> sessionConsumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumeProperties());
     }
 
@@ -74,7 +74,7 @@ public class KafkaSessionConfig {
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaSessionListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
-        factory.setConsumerFactory(consumerFactory());
+        factory.setConsumerFactory(sessionConsumerFactory());
         factory.setReplyTemplate(kafkaSessionTemplate());
         return factory;
     }
