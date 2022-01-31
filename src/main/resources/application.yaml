@@ -11,7 +11,7 @@ redis:
   host: localhost
   port: 30379
   database: 0
-  password: K9eW5bRyFP
+  password: xQFPtDQVpI
   timeout: 60000
 
 # kafka
