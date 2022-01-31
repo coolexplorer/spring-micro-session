@@ -89,8 +89,8 @@ public class JwtTokenMessage {
     @ToString
     @Schema(description = "JwtToken Cache Update Message")
     public static class UpdateMessage {
-        @Schema(example = "ff6681f0-50f8-4110-bf96-ef6cec45780e")
-        private String id;
+        @Schema(example = "1L")
+        private String accountId;
 
         @Schema(example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.....")
         private String jwtToken;
@@ -107,8 +107,6 @@ public class JwtTokenMessage {
     @ToString
     @Schema(description = "JwtToken Cache Delete Message")
     public static class DeleteMessage {
-        @Schema(example = "ff6681f0-50f8-4110-bf96-ef6cec45780e")
-        private String id;
         @Schema(example = "1L")
         private Long accountId;
     }
