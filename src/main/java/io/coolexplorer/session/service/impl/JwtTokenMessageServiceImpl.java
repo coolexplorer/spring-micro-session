@@ -82,7 +82,7 @@ public class JwtTokenMessageServiceImpl implements JwtTokenMessageService {
         LOGGER.debug("received message from '{}' : {}", record.topic(), record.value());
 
         JwtTokenMessage.DeleteMessage deleteMessage = objectMapper.readValue(record.value(), JwtTokenMessage.DeleteMessage.class);
-        jwtTokenService.delete(deleteMessage.getId());
+        jwtTokenService.delete(deleteMessage.getAccountId());
         ack.acknowledge();
     }
 }

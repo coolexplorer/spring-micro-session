@@ -8,4 +8,5 @@ public interface JwtTokenService {
     JwtToken getToken(String id);
     JwtToken getToken(Long accountId);
     void delete(String id);
+    void delete(Long accountId);
 }

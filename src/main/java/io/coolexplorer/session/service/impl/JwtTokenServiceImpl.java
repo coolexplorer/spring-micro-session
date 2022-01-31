@@ -53,4 +53,15 @@ public class JwtTokenServiceImpl implements JwtTokenService {
 
         tokenRepository.deleteById(id);
     }
+
+    @Override
+    public void delete(Long accountId) {
+        JwtToken retrievedToken = getToken(accountId);
+
+        if (retrievedToken == null) {
+            throw new JwtTokenNotFoundException();
+        }
+
+        tokenRepository.deleteJwtTokenByAccountId(accountId);
+    }
 }
