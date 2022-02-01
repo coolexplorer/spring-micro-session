@@ -18,6 +18,10 @@ import java.time.LocalDateTime;
 
 public class SessionDTO {
 
+    public SessionDTO() {
+        throw new IllegalStateException("SessionDTO");
+    }
+
     @Getter
     @Setter
     @Accessors(chain = true)
@@ -27,23 +31,21 @@ public class SessionDTO {
     @Schema(description = "Session Info")
     public static class SessionInfo {
         @Schema(example = "ff6681f0-50f8-4110-bf96-ef6cec45780e")
-        private String sessionId;
+        private String id;
+
         @Schema(example = "1L")
         private Long accountId;
+
         @Schema(example = "{\"orderCount\":1}")
         private String values;
+
         @Schema(example = "2021-01-01T00:00:00")
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime updatedAt;
 
         public static SessionInfo from(Session session, ModelMapper modelMapper) {
-            return modelMapper.map(session, SessionInfo.class)
-                    .setSessionId(session.getId());
+            return modelMapper.map(session, SessionInfo.class);
         }
-    }
-
-    public SessionDTO() {
-        throw new IllegalStateException("SessionDTO");
     }
 
     @Getter
@@ -57,10 +59,14 @@ public class SessionDTO {
         @Schema(example = "1L")
         @NotNull(message = "{account.id.empty}")
         private Long accountId;
+
         @Schema(example = "{\"orderCount\":1}")
-        @JsonStringConstraint(message = "{session.value.not.json}")
         @NotBlank(message = "{session.value.empty}")
+        @JsonStringConstraint(message = "{session.value.not.json}")
         private String values;
+
+        @Schema(example = "10L")
+        private Long expiration;
     }
 
     @Getter

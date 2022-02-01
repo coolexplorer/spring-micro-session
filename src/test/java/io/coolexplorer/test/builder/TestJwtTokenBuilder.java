@@ -10,14 +10,14 @@ public class TestJwtTokenBuilder {
     public static String JWT_TOKEN = UUID.randomUUID().toString();
     public static Long EXPIRATION = 100L;
 
-    public static JwtToken dummyJwtToken() {
+    public static JwtToken defaultJwtToken() {
         return new JwtToken()
                 .setAccountId(ACCOUNT_ID)
                 .setJwtToken(JWT_TOKEN);
     }
 
-    public static JwtToken dummyJwtToken(String id) {
-        return dummyJwtToken()
+    public static JwtToken defaultJwtToken(String id) {
+        return defaultJwtToken()
                 .setId(id);
     }
 }

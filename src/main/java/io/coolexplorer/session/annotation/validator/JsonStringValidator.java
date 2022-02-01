@@ -22,8 +22,10 @@ public class JsonStringValidator implements ConstraintValidator<JsonStringConstr
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
         try {
-            final ObjectMapper mapper = new ObjectMapper();
-            mapper.readTree(s);
+            if (s != null) {
+                final ObjectMapper mapper = new ObjectMapper();
+                mapper.readTree(s);
+            }
             return true;
         } catch (IOException e) {
             LOGGER.debug("String is not json format. {}", s);

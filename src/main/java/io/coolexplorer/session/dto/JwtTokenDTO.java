@@ -31,10 +31,13 @@ public class JwtTokenDTO {
     public static class JwtTokenInfo {
         @Schema(example = "ff6681f0-50f8-4110-bf96-ef6cec45780e")
         private String id;
+
         @Schema(example = "1L")
         private Long accountId;
+
         @Schema(example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.....")
         private String jwtToken;
+
         @Schema(example = "2021-01-01T00:00:00")
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime updatedAt;
