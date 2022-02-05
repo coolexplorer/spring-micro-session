@@ -4,14 +4,14 @@
 server:
   title: spring-micro-session
   version: '@project.version@'
-  port: 8180
+  port: 80
 
 # redis
 redis:
-  host: localhost
-  port: 30379
+  host: redis-headless.default.svc.cluster.local
+  port: 6379
   database: 0
-  password: K9eW5bRyFP
+  password: password
   timeout: 60000
 
 # kafka
