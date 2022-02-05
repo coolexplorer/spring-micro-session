@@ -14,29 +14,29 @@ import java.util.Set;
 
 public class SpringBootWebMvcTestSupport {
     @Autowired
-    MockMvc mockMvc;
+    public MockMvc mockMvc;
 
     @Autowired
-    ObjectMapper objectMapper;
+    public ObjectMapper objectMapper;
 
     @Autowired
-    ModelMapper modelMapper;
+    public ModelMapper modelMapper;
 
     @Autowired
-    Validator validator;
+    public Validator validator;
 
     @Autowired
-    MessageSourceAccessor validationMessageSourceAccessor;
+    public MessageSourceAccessor validationMessageSourceAccessor;
 
     void setUp() throws Exception {
 
     }
 
-    String getValidationMessage(String messageKey) {
+    public String getValidationMessage(String messageKey) {
         return validationMessageSourceAccessor.getMessage(messageKey);
     }
 
-    <T> Map<String, ConstraintViolation<T>> convertMap(Set<ConstraintViolation<T>> violations) {
+    public <T> Map<String, ConstraintViolation<T>> convertMap(Set<ConstraintViolation<T>> violations) {
         Map<String, ConstraintViolation<T>> map = new HashMap<>();
 
         for (ConstraintViolation violation: violations) {

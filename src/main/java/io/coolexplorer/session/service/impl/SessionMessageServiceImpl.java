@@ -37,6 +37,8 @@ public class SessionMessageServiceImpl implements SessionMessageService {
         Session createdSession = sessionService.create(modelMapper.map(createMessage, Session.class));
 
         ack.acknowledge();
+
+        LOGGER.debug("Created session : {}", createdSession);
     }
 
     @Override
@@ -49,10 +51,12 @@ public class SessionMessageServiceImpl implements SessionMessageService {
         LOGGER.debug("received message from '{}' : {}", record.topic(), record.value());
 
         SessionMessage.RequestMessage requestMessage = objectMapper.readValue(record.value(), SessionMessage.RequestMessage.class);
-        Session retrievedSession = sessionService.getSession(requestMessage.getId());
+        Session requestedSession = sessionService.getSession(requestMessage.getId());
         ack.acknowledge();
 
-        return SessionMessage.SessionInfo.from(retrievedSession, modelMapper);
+        LOGGER.debug("Requested session : {}", requestedSession);
+
+        return SessionMessage.SessionInfo.from(requestedSession, modelMapper);
     }
 
     @Override
@@ -64,9 +68,11 @@ public class SessionMessageServiceImpl implements SessionMessageService {
         LOGGER.debug("received message from '{}' : {}", record.topic(), record.value());
 
         SessionMessage.UpdateMessage updateMessage = objectMapper.readValue(record.value(), SessionMessage.UpdateMessage.class);
-        Session session = sessionService.update(modelMapper.map(updateMessage, Session.class));
+        Session updatedSession = sessionService.update(modelMapper.map(updateMessage, Session.class));
 
         ack.acknowledge();
+
+        LOGGER.debug("Updated session : {}", updatedSession);
     }
 
     @Override
