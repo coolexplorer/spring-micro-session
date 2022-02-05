@@ -90,7 +90,7 @@ public class JwtTokenMessage {
     @Schema(description = "JwtToken Cache Update Message")
     public static class UpdateMessage {
         @Schema(example = "1L")
-        private String accountId;
+        private Long accountId;
 
         @Schema(example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.....")
         private String jwtToken;

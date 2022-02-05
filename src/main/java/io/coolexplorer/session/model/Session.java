@@ -2,6 +2,7 @@ package io.coolexplorer.session.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @Accessors(chain = true)
 @RedisHash("session")
+@ToString
 public class Session implements Serializable {
     @Id
     private String id;
