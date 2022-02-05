@@ -4,7 +4,7 @@
 
 	<groupId>io.coolexplorer</groupId>
 	<artifactId>spring-boot-session</artifactId>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>spring-boot-session</name>
 	<description>Session service of spring-micro-project</description>
