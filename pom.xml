@@ -4,7 +4,7 @@
 
 	<groupId>io.coolexplorer</groupId>
 	<artifactId>spring-boot-session</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<packaging>war</packaging>
 	<name>spring-boot-session</name>
 	<description>Session service of spring-micro-project</description>
@@ -144,6 +144,11 @@
 					<artifactId>slf4j-simple</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

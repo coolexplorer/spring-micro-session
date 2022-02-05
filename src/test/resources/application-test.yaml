@@ -9,7 +9,7 @@ server:
 #redis
 redis:
   host: localhost
-  port: 30379
+  port: 6379
   database: 0
   password:
   timeout: 60000
@@ -17,7 +17,7 @@ redis:
 # kafka
 kafka:
   bootstrap:
-    addresses: localhost:29092
+    addresses: ${spring.embedded.kafka.brokers:localhost:9092}
   consumer:
     groupId: session
 
