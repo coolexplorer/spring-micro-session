@@ -17,7 +17,7 @@ redis:
 # kafka
 kafka:
   bootstrap:
-    addresses: kafka-headless.default.svc.cluster.local:9092
+    addresses: kafka.default.svc.cluster.local:9092
   consumer:
     groupId: session
 
