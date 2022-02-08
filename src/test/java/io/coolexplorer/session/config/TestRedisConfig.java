@@ -17,7 +17,7 @@ public class TestRedisConfig {
     @Value("${redis.port}")
     private int redisPort;
 
-    private static RedisServer redisServer;
+    private static RedisServer redisServer = null;
 
     @PostConstruct
     public void postConstruct() {
