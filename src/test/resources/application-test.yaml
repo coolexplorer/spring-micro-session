@@ -10,7 +10,7 @@ spring:
       - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
   redis:
     host: localhost
-    port: 6390
+    port: 6378
 
 # server
 server:
