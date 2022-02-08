@@ -8,9 +8,6 @@ spring:
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
-  redis:
-    host: localhost
-    port: 6378
 
 # server
 server:
