@@ -29,6 +29,8 @@ kafka:
     addresses: ${spring.embedded.kafka.brokers:localhost:9092}
   consumer:
     groupId: session
+  test:
+    topic: test.topic
 
 # documentation
 springdoc:
