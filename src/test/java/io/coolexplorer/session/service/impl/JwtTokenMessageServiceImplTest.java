@@ -1,6 +1,5 @@
 package io.coolexplorer.session.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.coolexplorer.session.controller.SpringBootWebMvcTestSupport;
 import io.coolexplorer.session.message.JwtTokenMessage;
 import io.coolexplorer.session.service.JwtTokenService;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.kafka.test.EmbeddedKafkaBroker;
