@@ -1,10 +1,10 @@
 package io.coolexplorer.session.service.impl;
 
-import io.coolexplorer.session.controller.SpringBootWebMvcTestSupport;
-import io.coolexplorer.session.message.JwtTokenMessage;
-import io.coolexplorer.session.service.JwtTokenService;
-import io.coolexplorer.session.topic.JwtTokenTopic;
-import io.coolexplorer.test.builder.TestJwtTokenBuilder;
+
+import io.coolexplorer.session.message.SessionMessage;
+import io.coolexplorer.session.service.SessionService;
+import io.coolexplorer.session.topic.SessionTopic;
+import io.coolexplorer.test.builder.TestSessionBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -45,20 +45,20 @@ import static org.mockito.Mockito.when;
 @EmbeddedKafka
 @AutoConfigureMockMvc
 @TestPropertySource(properties = "spring.config.location=classpath:application-test.yaml")
-public class JwtTokenMessageServiceImplTest extends SpringBootWebMvcTestSupport {
+public class SessionMessageServiceImplTest {
     @MockBean
-    private JwtTokenService jwtTokenService;
+    private SessionService sessionService;
 
     @Autowired
     private EmbeddedKafkaBroker embeddedKafkaBroker = new EmbeddedKafkaBroker(
             2,
             true,
             2,
-            JwtTokenTopic.TOPIC_CREATE_JWT_TOKEN,
-            JwtTokenTopic.TOPIC_REQUEST_JWT_TOKEN,
-            JwtTokenTopic.TOPIC_UPDATE_JWT_TOKEN,
-            JwtTokenTopic.TOPIC_DELETE_JWT_TOKEN,
-            JwtTokenTopic.TOPIC_REPLY_JWT_TOKEN
+            SessionTopic.TOPIC_CREATE_SESSION,
+            SessionTopic.TOPIC_REQUEST_SESSION,
+            SessionTopic.TOPIC_UPDATE_SESSION,
+            SessionTopic.TOPIC_DELETE_SESSION,
+            SessionTopic.TOPIC_REPLY_SESSION
     );
 
     private Producer<String, Object> producer;
@@ -79,82 +79,82 @@ public class JwtTokenMessageServiceImplTest extends SpringBootWebMvcTestSupport 
     }
 
     @Nested
-    @DisplayName("JwtToken Cache Creation Test")
-    class JwtTokenCacheCreationTest {
+    @DisplayName("Session Cache Creation Message Test")
+    class SessionCacheCreationTest {
         @Test
         @DisplayName("Success")
-        void testCreateMessageForJwtTokenCache() {
-            JwtTokenMessage.CreateMessage createMessage = new JwtTokenMessage.CreateMessage();
-            createMessage.setAccountId(1L);
-            createMessage.setJwtToken("test-jwtToken");
+        void testCreateMessageForSessionCache() {
+            SessionMessage.CreateMessage createMessage = new SessionMessage.CreateMessage();
+            createMessage.setAccountId(TestSessionBuilder.ACCOUNT_ID);
+            createMessage.setValues(TestSessionBuilder.VALUES);
             createMessage.setExpiration(120L);
 
-            ProducerRecord<String, Object> producerRecord = new ProducerRecord<>(JwtTokenTopic.TOPIC_CREATE_JWT_TOKEN, createMessage);
+            ProducerRecord<String, Object> producerRecord = new ProducerRecord<>(SessionTopic.TOPIC_CREATE_SESSION, createMessage);
             producer.send(producerRecord);
             producer.flush();
 
-            when(jwtTokenService.create(any())).thenReturn(TestJwtTokenBuilder.defaultJwtToken());
+            when(sessionService.create(any())).thenReturn(TestSessionBuilder.defaultSession(TestSessionBuilder.ID));
 
-            verify(jwtTokenService, timeout(10000L).times(1)).create(any());
+            verify(sessionService, timeout(10000L).times(1)).create(any());
         }
     }
 
     @Nested
-    @DisplayName("JwtToken Cache Update Test")
-    class JwtTokenCacheUpdateTest {
+    @DisplayName("Session Cache Update Message Test")
+    class SessionCacheUpdateTest {
         @Test
         @DisplayName("Success")
-        void testUpdateMessageForJwtTokenCache() {
-            JwtTokenMessage.UpdateMessage updateMessage = new JwtTokenMessage.UpdateMessage();
-            updateMessage.setAccountId(1L);
-            updateMessage.setJwtToken("test-jwtToken");
+        void testUpdateMessageForSessionCache() {
+            SessionMessage.UpdateMessage updateMessage = new SessionMessage.UpdateMessage();
+            updateMessage.setAccountId(TestSessionBuilder.ACCOUNT_ID);
+            updateMessage.setValues(TestSessionBuilder.VALUES);
             updateMessage.setExpiration(120L);
 
-            ProducerRecord<String, Object> producerRecord = new ProducerRecord<>(JwtTokenTopic.TOPIC_UPDATE_JWT_TOKEN, updateMessage);
+            ProducerRecord<String, Object> producerRecord = new ProducerRecord<>(SessionTopic.TOPIC_UPDATE_SESSION, updateMessage);
             producer.send(producerRecord);
             producer.flush();
 
-            when(jwtTokenService.update(any())).thenReturn(TestJwtTokenBuilder.defaultJwtToken());
+            when(sessionService.update(any())).thenReturn(TestSessionBuilder.defaultSession(TestSessionBuilder.ID));
 
-            verify(jwtTokenService, timeout(10000L).times(1)).update(any());
+            verify(sessionService, timeout(10000L).times(1)).update(any());
         }
     }
 
     @Nested
-    @DisplayName("JwtToken Cache Request Test")
-    class JwtTokenCacheRequestTest {
+    @DisplayName("Session Cache Request Message Test")
+    class SessionCacheRequestTest {
         @Test
         @DisplayName("Success")
-        void testRequestMessageForJwtTokenCache() {
-            JwtTokenMessage.RequestMessage requestMessage = new JwtTokenMessage.RequestMessage();
-            requestMessage.setAccountId(1L);
+        void testRequestMessageForSessionCache() {
+            SessionMessage.RequestMessage requestMessage = new SessionMessage.RequestMessage();
+            requestMessage.setAccountId(TestSessionBuilder.ACCOUNT_ID);
 
-            ProducerRecord<String, Object> producerRecord = new ProducerRecord<>(JwtTokenTopic.TOPIC_REQUEST_JWT_TOKEN, requestMessage);
+            ProducerRecord<String, Object> producerRecord = new ProducerRecord<>(SessionTopic.TOPIC_REQUEST_SESSION, requestMessage);
             producer.send(producerRecord);
             producer.flush();
 
-            when(jwtTokenService.getToken(anyLong())).thenReturn(TestJwtTokenBuilder.defaultJwtToken());
+            when(sessionService.getSession(anyLong())).thenReturn(TestSessionBuilder.defaultSession(TestSessionBuilder.ID));
 
-            verify(jwtTokenService, timeout(10000L).times(1)).getToken(anyLong());
+            verify(sessionService, timeout(10000L).times(1)).getSession(anyLong());
         }
     }
 
     @Nested
-    @DisplayName("JwtToken Cache Delete Test")
-    class JwtTokenCacheDeleteTest {
+    @DisplayName("Session Cache Deletion Message Test")
+    class SessionCacheDeletionTest {
         @Test
         @DisplayName("Success")
-        void testDeleteMessageForJwtTokenCache() {
-            JwtTokenMessage.DeleteMessage deleteMessage = new JwtTokenMessage.DeleteMessage();
-            deleteMessage.setAccountId(1L);
+        void testDeleteMessageForSessionCache() {
+            SessionMessage.DeleteMessage deleteMessage = new SessionMessage.DeleteMessage();
+            deleteMessage.setAccountId(TestSessionBuilder.ACCOUNT_ID);
 
-            ProducerRecord<String, Object> producerRecord = new ProducerRecord<>(JwtTokenTopic.TOPIC_DELETE_JWT_TOKEN, deleteMessage);
+            ProducerRecord<String, Object> producerRecord = new ProducerRecord<>(SessionTopic.TOPIC_DELETE_SESSION, deleteMessage);
             producer.send(producerRecord);
             producer.flush();
 
-            doNothing().when(jwtTokenService).delete(anyLong());
+            doNothing().when(sessionService).delete(anyLong());
 
-            verify(jwtTokenService, timeout(10000L).times(1)).delete(anyLong());
+            verify(sessionService, timeout(10000L).times(1)).delete(anyLong());
         }
     }
 }

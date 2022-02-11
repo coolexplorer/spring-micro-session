@@ -52,4 +52,15 @@ public class SessionServiceImpl implements SessionService {
 
         sessionRepository.delete(retrievedSession);
     }
+
+    @Override
+    public void delete(Long accountId) {
+        Session retrievedSession = getSession(accountId);
+
+        if (retrievedSession == null) {
+            throw new SessionNotFoundException();
+        }
+
+        sessionRepository.delete(retrievedSession);
+    }
 }

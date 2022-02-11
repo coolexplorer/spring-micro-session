@@ -51,7 +51,7 @@ public class SessionMessageServiceImpl implements SessionMessageService {
         LOGGER.debug("received message from '{}' : {}", record.topic(), record.value());
 
         SessionMessage.RequestMessage requestMessage = objectMapper.readValue(record.value(), SessionMessage.RequestMessage.class);
-        Session requestedSession = sessionService.getSession(requestMessage.getId());
+        Session requestedSession = sessionService.getSession(requestMessage.getAccountId());
         ack.acknowledge();
 
         LOGGER.debug("Requested session : {}", requestedSession);
@@ -84,7 +84,7 @@ public class SessionMessageServiceImpl implements SessionMessageService {
         LOGGER.debug("received message from '{}' : {}", record.topic(), record.value());
 
         SessionMessage.DeleteMessage deleteMessage = objectMapper.readValue(record.value(), SessionMessage.DeleteMessage.class);
-        sessionService.delete(deleteMessage.getId());
+        sessionService.delete(deleteMessage.getAccountId());
 
         ack.acknowledge();
     }
