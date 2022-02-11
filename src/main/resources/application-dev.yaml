@@ -9,10 +9,17 @@ server:
 # redis
 redis:
   host: localhost
-  port: 30379
+  port: 6379
   database: 0
-  password: K9eW5bRyFP
+  password:
   timeout: 60000
+
+# kafka
+kafka:
+  bootstrap:
+    addresses: localhost:9092
+  consumer:
+    groupId: session
 
 # documentation
 springdoc:

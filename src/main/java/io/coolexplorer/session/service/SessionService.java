@@ -8,4 +8,5 @@ public interface SessionService {
     Session getSession(String id);
     Session getSession(Long AccountId);
     void delete(String id);
+    void delete(Long accountId);
 }
