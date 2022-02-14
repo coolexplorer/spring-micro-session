@@ -4,7 +4,7 @@
 server:
   title: spring-micro-session
   version: '@project.version@'
-  port: 8180
+  port: 8280
 
 # redis
 redis:
