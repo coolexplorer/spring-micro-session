@@ -9,9 +9,9 @@ server:
 # redis
 redis:
   host: localhost
-  port: 30379
+  port: 6379
   database: 0
-  password: xQFPtDQVpI
+  password: sOmE_sEcUrE_pAsS
   timeout: 60000
 
 # kafka
